@@ -7,7 +7,8 @@ export class GetImagesProvider {
 
   constructor(public plt: Platform, public camera: Camera) {}
 
-  getCamera(size = null){    
+  getCamera(size = null){   
+    return new Promise (function (resolve, reject) { 
       const options: CameraOptions = {
         destinationType: this.camera.DestinationType.FILE_URI,
         encodingType: this.camera.EncodingType.JPEG,
@@ -31,15 +32,16 @@ export class GetImagesProvider {
            imageData.replace(/^file:\/\//, '');
         }
 
-        return imageData;
+        resolve(imageData);
 
       }, (err) => {
-         return err;
+         reject(err);
       });
+    });
   }
 
-
   getGaleria(){
+     return new Promise (function (resolve, reject) {
         const options: CameraOptions = {
           quality: 100,
           sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
@@ -56,16 +58,16 @@ export class GetImagesProvider {
 
           if (this.plt.is('ios')) {
              imageData.replace(/^file:\/\//, '');
-             return imageData;
+             resolve(imageData);
           }
           else{
-              return finalImagem;
+             resolve(finalImagem)
           }
 
         }, (err) => {
-         return err;
+         reject(err);
         });
+     });
   }
-
 
 }
