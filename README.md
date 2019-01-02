@@ -20,7 +20,7 @@ Você precisa instalar o plugin Camera no seu projeto, após isso importe o prov
 ```
 
 **Paramêtros do método getCamera():**
-- Size : Um objeto que precisa ter as propiedades **width** e **height** com valores **integer**.
+- Size : Um objeto que precisa ter as propiedades **width** e **height** com valores **integer**, não é obrigatório
 
 
 ```typescript
